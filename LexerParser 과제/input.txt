@@ -1,0 +1,16 @@
+// this is a comment to be ignored
+int main(){bool a, b;
+a245= 53 + b + 42.345;
+char c;
+// a=b+c+b
+if (a245<= (182957) Variable25 ==what1919;
+else a = false;
+b = true;
+float k = 12.245;
+int id;
+for (i = 0; a < x; i++) {
+a = a*2;
+}
+while (i != 2)
+    i = i + 1;
+}
