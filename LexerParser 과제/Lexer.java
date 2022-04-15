@@ -9,7 +9,7 @@ public class Lexer {
     private int lineno = 0;
     private int col = 1;
     private final String letters = "abcdefghijklmnopqrstuvwxyz"
-        + "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        + "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "$" + "_" + ".";//letters에 $_.추가
     private final String digits = "0123456789";
     private final char eolnCh = '\n';
     private final char eofCh = '\004';
