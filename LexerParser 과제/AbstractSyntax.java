@@ -12,13 +12,41 @@ class Program {
         decpart = d;
         body = b;
     }
-
+    // display 함수 추가
+    public void display(int a)
+    {
+        for (int i = 0; i < a; i++)
+        {
+            System.out.print("\t");
+        }
+        System.out.printf("Program (abstract syntax:)\n");
+        decpart.display(a);
+        body.display(a);
+    }
 }
 
 class Declarations extends ArrayList<Declaration> {
     // Declarations = Declaration*
     // (a list of declarations d1, d2, ..., dn)
-
+    // display 함수 추가
+    public void display(int a)
+    {
+        for (int i = 0; i < a; ++i)
+        {
+            System.out.print("\t");
+        }
+        System.out.println("Declarations: ");
+        for (int i = 0; i < a; ++i)
+        {
+            System.out.print("\t");
+        }
+        System.out.print("Declarations = {");
+        for(int i = 0; i < size(); i++)
+        {
+            get(i).display(a);
+        }
+        System.out.println("}");
+    }
 }
 
 class Declaration {
@@ -29,7 +57,12 @@ class Declaration {
     Declaration (Variable var, Type type) {
         v = var; t = type;
     } // declaration */
-
+    //display 함수 추가
+    public void display(int a)
+    {
+        System.out.print(" <" + v + ", ");
+        System.out.print(t + "> ");
+    }
 }
 
 class Type {
@@ -49,7 +82,8 @@ class Type {
 
 abstract class Statement {
     // Statement = Skip | Block | Assignment | Conditional | Loop
-
+    //display 추가
+    public void display(int a){}
 }
 
 class Skip extends Statement {
@@ -59,7 +93,19 @@ class Block extends Statement {
     // Block = Statement*
     //         (a Vector of members)
     public ArrayList<Statement> members = new ArrayList<Statement>();
-
+    //display 함수 추가.
+    public void display(int a)
+    {
+        for(int i = 0; i < a; ++i)
+        {
+            System.out.print("\t");
+        }
+        System.out.println("Block :");
+        for(int i = 0; i < members.size(); i++)
+        {
+            members.get(i).display(a);
+        }
+    }
 }
 
 class Assignment extends Statement {
@@ -71,7 +117,17 @@ class Assignment extends Statement {
         target = t;
         source = e;
     }
-
+    //display 함수 추가.
+    public void display(int a)
+    {
+        for(int i = 0; i < a; ++i)
+        {
+            System.out.print("\t");
+        }
+        System.out.println("Assignment: ");
+        target.display(++a);
+        source.display(a);
+    }
 }
 
 class Conditional extends Statement {
@@ -87,7 +143,17 @@ class Conditional extends Statement {
     Conditional (Expression t, Statement tp, Statement ep) {
         test = t; thenbranch = tp; elsebranch = ep;
     }
-    
+    //display 추가
+    public void display(int a)
+    {
+        for (int i = 0; i < a; ++i)
+        {
+            System.out.print("\t");
+        }
+        test.display(++a);
+        thenbranch.display(a);
+        elsebranch.display(a);
+    }
 }
 
 class Loop extends Statement {
@@ -98,12 +164,22 @@ class Loop extends Statement {
     Loop (Expression t, Statement b) {
         test = t; body = b;
     }
-    
+    //display 추가
+    public void display(int a)
+    {
+        for (int i = 0; i < a; ++i)
+        {
+            System.out.print("\t");
+        }
+        test.display(++a);
+        body.display(a);
+    }
 }
 
 abstract class Expression {
     // Expression = Variable | Value | Binary | Unary
-
+    //display 함수 추가
+    public void display(int a){}
 }
 
 class Variable extends Expression {
@@ -120,7 +196,15 @@ class Variable extends Expression {
     }
     
     public int hashCode ( ) { return id.hashCode( ); }
-
+    //display 추가
+    public void display(int a)
+    {
+        for (int i = 0; i < a; ++i)
+        {
+            System.out.print("\t");
+        }
+        System.out.println("Variables " + id); 
+    }
 }
 
 abstract class Value extends Expression {
@@ -178,7 +262,16 @@ class IntValue extends Value {
         if (undef)  return "undef";
         return "" + value;
     }
-
+    //display 추가
+    public void display(int a)
+    {
+        for (int i = 0; i < a; ++i)
+        {
+            System.out.print("\t");
+        }
+        System.out.print("Int: ");
+        System.out.println(value);
+    }
 }
 
 class BoolValue extends Value {
@@ -202,7 +295,16 @@ class BoolValue extends Value {
         if (undef)  return "undef";
         return "" + value;
     }
-
+    //display 함수 추가
+    public void display(int a)
+    {
+        for (int i = 0; i < a; ++i)
+        {
+            System.out.print("\t");
+        }
+        System.out.print("BoolValue: ");
+        System.out.println(value);
+    }
 }
 
 class CharValue extends Value {
@@ -221,7 +323,16 @@ class CharValue extends Value {
         if (undef)  return "undef";
         return "" + value;
     }
-
+    //display 함수 추가
+    public void display(int a)
+    {
+        for (int i = 0; i < a; ++i)
+        {
+            System.out.print("\t");
+        }
+        System.out.print("CharValue: ");
+        System.out.println(value);
+    }
 }
 
 class FloatValue extends Value {
@@ -240,7 +351,16 @@ class FloatValue extends Value {
         if (undef)  return "undef";
         return "" + value;
     }
-
+    //display 함수 추가
+    public void display(int a)
+    {
+        for (int i = 0; i < a; ++i)
+        {
+            System.out.print("\t");
+        }
+        System.out.print("FloatValue: ");
+        System.out.println(value);
+    }
 }
 
 class Binary extends Expression {
@@ -251,7 +371,23 @@ class Binary extends Expression {
     Binary (Operator o, Expression l, Expression r) {
         op = o; term1 = l; term2 = r;
     } // binary
-
+    // toString 함수 추가
+    public String toString()
+    {
+        return ("Binary: op=" + op + " term1=" + term1 + " term2=" + term2);
+    }
+    //display 함수 추가
+    public void display(int a)
+    {
+        for (int i = 0; i < a; ++i)
+        {
+            System.out.print("\t");
+        }
+        System.out.print("Binary: ");
+        op.display(++a);
+        term1.display(a);
+        term2.display(a);
+    }
 }
 
 class Unary extends Expression {
@@ -262,7 +398,17 @@ class Unary extends Expression {
     Unary (Operator o, Expression e) {
         op = o; term = e;
     } // unary
-
+    //display 함수 추가
+    public void display(int a)
+    {
+        for (int i = 0; i < a; ++i)
+        {
+            System.out.print("\t");
+        }
+        System.out.print("Unary: ");
+        op.display(++a);
+        term.display(a);
+    }
 }
 
 class Operator {
@@ -410,5 +556,9 @@ class Operator {
     final static public Operator boolMap (String op) {
         return map (boolMap, op);
     }
-
+    
+    public void display(int a)
+    {
+        System.out.println(val);
+    }
 }
